@@ -3,6 +3,7 @@ import SearchBar from "./components/SearchBar/SearchBar";
 import LeadMoreBtn from "./components/LeadMoreBtn/LeadMoreBtn";
 import { api } from "./hooks/api";
 import ImageGallery from "./components/ImageGallery/ImageGallery";
+import Loader from "./components/Loader/Loader";
 
 function App() {
   const [searchResults, setSearchResults] = useState(null);

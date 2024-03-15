@@ -6,11 +6,12 @@ const ImageGallery = ({ images }) => {
     <div>
       <ul className={css.gallery}>
         {images.map((image) => (
-          <ImageCard
-            key={image.id}
-            small={image.urls.small}
-            description={image.alt_description}
-          />
+          <li key={image.id}>
+            <ImageCard
+              small={image.urls.small}
+              description={image.alt_description}
+            />
+          </li>
         ))}
       </ul>
     </div>
