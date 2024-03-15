@@ -1,35 +1,46 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useEffect, useState } from "react";
+import SearchBar from "./components/SearchBar/SearchBar";
+import LeadMoreBtn from "./components/LeadMoreBtn/LeadMoreBtn";
+import { api } from "./hooks/api";
+import ImageGallery from "./components/ImageGallery/ImageGallery";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [searchResults, setSearchResults] = useState(null);
+  const [searchTerm, setSearchTerm] = useState(null);
+
+  useEffect(() => {
+    if (searchTerm === null) return;
+    async function fetchData() {
+      try {
+        const data = await api(searchTerm, 1);
+        setSearchResults(data);
+      } catch (err) {
+        console.error(err);
+      }
+    }
+
+    fetchData();
+  }, [searchTerm]);
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const { searchInput } = form.elements;
+    setSearchTerm(searchInput.value);
+    console.log(searchInput.value);
+    form.reset();
+  };
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <SearchBar onSubmit={onSubmit} />
+      {searchResults !== null && Array.isArray(searchResults) && (
+        <ImageGallery images={searchResults} />
+      )}
+
+      {/* <LeadMoreBtn /> */}
     </>
-  )
+  );
 }
 
-export default App
+export default App;
