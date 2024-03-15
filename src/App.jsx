@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import SearchBar from "./components/SearchBar/SearchBar";
 import LeadMoreBtn from "./components/LeadMoreBtn/LeadMoreBtn";
-import { api } from "./hooks/api";
+import { useApi } from "./hooks/api";
 import ImageGallery from "./components/ImageGallery/ImageGallery";
 import Loader from "./components/Loader/Loader";
 
@@ -15,12 +15,13 @@ function App() {
     async function fetchData() {
       try {
          setIsLoading(true);
-        const data = await api(searchTerm, 1);
+        const data = await useApi(searchTerm, 1);
         setSearchResults(data);
       } catch (err) {
         console.error(err);
       } finally {
         setIsLoading(false);
+        setSearchTerm(null);
       }
     }
 
