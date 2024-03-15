@@ -8,15 +8,19 @@ import Loader from "./components/Loader/Loader";
 function App() {
   const [searchResults, setSearchResults] = useState(null);
   const [searchTerm, setSearchTerm] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     if (searchTerm === null) return;
     async function fetchData() {
       try {
+         setIsLoading(true);
         const data = await api(searchTerm, 1);
         setSearchResults(data);
       } catch (err) {
         console.error(err);
+      } finally {
+        setIsLoading(false);
       }
     }
 
@@ -38,6 +42,7 @@ function App() {
       {searchResults !== null && Array.isArray(searchResults) && (
         <ImageGallery images={searchResults} />
       )}
+      {isLoading && <Loader />}
 
       {/* <LeadMoreBtn /> */}
     </>
