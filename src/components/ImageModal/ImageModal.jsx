@@ -14,7 +14,7 @@ const ImageModal = ({ imageModal, modalIsOpen, closeModal }) => {
     },
   };
   return (
-    <div className="backdrop"  onClick={closeModal}>
+    <div className="backdrop" onClick={closeModal}>
       <Modal
         style={customStyles}
         isOpen={modalIsOpen}
@@ -27,9 +27,8 @@ const ImageModal = ({ imageModal, modalIsOpen, closeModal }) => {
               src={imageModal.urls.regular}
               alt={imageModal.alt_description}
             />
+            <p>{imageModal.description}</p>
           </div>
-
-          <p>{imageModal.description}</p>
         </div>
       </Modal>
     </div>
