@@ -1,5 +1,6 @@
 import React from "react";
 import css from "./SearchBar.module.css";
+import { Toaster } from "react-hot-toast";
 
 const SearchBar = ({ onSubmit }) => {
   return (
@@ -13,6 +14,7 @@ const SearchBar = ({ onSubmit }) => {
           placeholder="Search images and photos"
           className={css.searchInput}
         />
+        <Toaster position="top-right" reverseOrder={false} />
         <button className={css.searchBtn} type="submit">
           Search
         </button>

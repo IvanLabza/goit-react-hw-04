@@ -6,6 +6,7 @@ import ImageGallery from "./components/ImageGallery/ImageGallery";
 import Loader from "./components/Loader/Loader";
 import ErrorMassage from "./components/ErrorMassage/ErrorMassage";
 import ImageModal from "./components/ImageModal/ImageModal";
+import toast from "react-hot-toast";
 
 function App() {
   const [searchResults, setSearchResults] = useState(null);
@@ -64,6 +65,8 @@ function App() {
     if (searchInput.value !== "") {
       setSearchTerm(searchInput.value);
       form.reset();
+    } else {
+      toast.error("This didn't work.");
     }
   };
 
