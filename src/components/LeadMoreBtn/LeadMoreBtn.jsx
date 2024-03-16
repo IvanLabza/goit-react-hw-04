@@ -1,10 +1,10 @@
 import React from "react";
 import css from "./LeadMoreBtn.module.css";
 
-const LeadMoreBtn = () => {
+const LeadMoreBtn = ({loadMore}) => {
   return (
     <div className={css.wraps}>
-          <button className={css.btn}>Load More</button>
+          <button  onClick={loadMore} className={css.btn}>Load More</button>
     </div>
   );
 };

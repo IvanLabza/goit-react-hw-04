@@ -4,49 +4,95 @@ import LeadMoreBtn from "./components/LeadMoreBtn/LeadMoreBtn";
 import { useApi } from "./hooks/api";
 import ImageGallery from "./components/ImageGallery/ImageGallery";
 import Loader from "./components/Loader/Loader";
+import ErrorMassage from "./components/ErrorMassage/ErrorMassage";
+import ImageModal from "./components/ImageModal/ImageModal";
 
 function App() {
   const [searchResults, setSearchResults] = useState(null);
   const [searchTerm, setSearchTerm] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [page, setPage] = useState(1);
+  const [isError, setError] = useState(false);
+  const [isLoadMore, setLoadMore] = useState(false);
+  const [modalIsOpen, setIsOpen] = useState(false);
+  const [imageModal, setImageModal] = useState(null);
 
   useEffect(() => {
     if (searchTerm === null) return;
     async function fetchData() {
       try {
-         setIsLoading(true);
-        const data = await useApi(searchTerm, 1);
+        setIsLoading(true);
+        const data = await useApi(searchTerm, page);
         setSearchResults(data);
+        setLoadMore(true);
       } catch (err) {
-        console.error(err);
+        setError(true);
       } finally {
         setIsLoading(false);
-        setSearchTerm(null);
       }
     }
 
     fetchData();
   }, [searchTerm]);
 
+  useEffect(() => {
+    if (searchTerm === null) return;
+    async function fetchData() {
+      try {
+        setIsLoading(true);
+        const data = await useApi(searchTerm, page);
+        if (Array.isArray(data) && Array.isArray(searchResults)) {
+          setSearchResults((prevState) => [...prevState, ...data]);
+        }
+      } catch (err) {
+        setError(true);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+    fetchData();
+  }, [page]);
+
+  const loadMore = () => {
+    setPage(page + 1);
+  };
+
   const onSubmit = (e) => {
     e.preventDefault();
     const form = e.target;
     const { searchInput } = form.elements;
-    setSearchTerm(searchInput.value);
-    console.log(searchInput.value);
-    form.reset();
+    if (searchInput.value !== "") {
+      setSearchTerm(searchInput.value);
+      form.reset();
+    }
   };
 
+  const openModal = (image) => {
+    setImageModal(image);
+    setIsOpen(true);
+  };
+
+  function closeModal() {
+    setIsOpen(false);
+  }
+
   return (
-    <>
+    <div className="wrapper">
       <SearchBar onSubmit={onSubmit} />
       {searchResults !== null && Array.isArray(searchResults) && (
-        <ImageGallery images={searchResults} />
+        <ImageGallery openModal={openModal} images={searchResults} />
       )}
       {isLoading && <Loader />}
-
-      {/* <LeadMoreBtn /> */}
-    </>
+      {isError && <ErrorMassage />}
+      {isLoadMore && <LeadMoreBtn loadMore={loadMore} />}
+      {modalIsOpen && (
+        <ImageModal
+          closeModal={closeModal}
+          modalIsOpen={modalIsOpen}
+          imageModal={imageModal}
+        />
+      )}
+    </div>
   );
 }
 

@@ -40,14 +40,8 @@ img {
 }
 
 .wrapper {
-  background-color: cadetblue;
-  padding: 10%;
-  height: 100vh;
-}
-.container {
-  max-width: 550px;
-  background: #000;
-  border-radius: 35px;
+  background-color: rgb(238, 243, 249);
+  max-width: 1980px;
   margin: 0 auto;
-  padding: 12px;
 }
+
