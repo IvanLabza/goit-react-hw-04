@@ -66,7 +66,7 @@ function App() {
       setSearchTerm(searchInput.value);
       form.reset();
     } else {
-      toast.error("This didn't work.");
+      toast.error("This didn't work.", { duration: 1500 });
     }
   };
 

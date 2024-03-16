@@ -14,7 +14,7 @@ const SearchBar = ({ onSubmit }) => {
           placeholder="Search images and photos"
           className={css.searchInput}
         />
-        <Toaster position="top-right" reverseOrder={false} />
+        <Toaster gutter={1} position="top-right" reverseOrder={false} />
         <button className={css.searchBtn} type="submit">
           Search
         </button>
