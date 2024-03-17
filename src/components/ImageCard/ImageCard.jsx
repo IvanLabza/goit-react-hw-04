@@ -6,7 +6,6 @@ const ImageCard = ({ small, title, image, openModal }) => {
       <img
         onClick={() => {
           openModal(image);
-          console.log(image);
         }}
         width={300}
         src={small}

@@ -5,8 +5,8 @@ const ImageGallery = ({ images, openModal }) => {
   return (
     <div>
       <ul className={css.gallery}>
-        {images.map((image) => (
-          <li  key={image.id}>
+        {images.map((image, i) => (
+          <li key={image.id + i}>
             <ImageCard
               small={image.urls.small}
               description={image.alt_description}
