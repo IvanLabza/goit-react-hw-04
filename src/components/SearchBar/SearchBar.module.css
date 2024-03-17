@@ -1,6 +1,6 @@
 header {
   margin: 0 auto;
-  max-width: 1920px;
+  max-width: 1980px;
   background-color: rgb(38, 38, 244);
   padding: 10px;
 }
@@ -39,4 +39,18 @@ header {
   background-color: rgb(117, 123, 224);
   color: rgb(34, 32, 32);
   font-weight: 600;
+}
+
+@media screen and (max-width: 618px) {
+  .searchBar {
+    max-width: 320px;
+  }
+  .searchBtn {
+    right: 36px;
+    font-size: 12px;
+    top: 7.5px;
+  }
+  .searchInput{
+    font-size: 13px;
+  }
 }

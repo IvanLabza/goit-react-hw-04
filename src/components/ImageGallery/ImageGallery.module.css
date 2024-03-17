@@ -4,8 +4,8 @@
   gap: 10px;
   justify-content: center;
   align-items: center;
-  padding: 50px 0;
-  max-width: 1920px;
+  padding: 50px 5px;
+  max-width: 1250px;
   margin: 0 auto;
 }
 .galleryCard {

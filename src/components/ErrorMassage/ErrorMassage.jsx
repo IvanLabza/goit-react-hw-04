@@ -6,7 +6,7 @@ const ErrorMassage = () => {
     color: "red",
     marginTop: 50,
   };
-  return <div style={error}>not a found Error 404</div>;
+  return <div style={error}>Not a found Error 404</div>;
 };
 
 export default ErrorMassage;
