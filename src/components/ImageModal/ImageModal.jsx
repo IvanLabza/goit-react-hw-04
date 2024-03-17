@@ -1,7 +1,7 @@
 import Modal from "react-modal";
 import css from "./ImageModal.module.css";
 
-const ImageModal = ({ imageModal, modalIsOpen, closeModal }) => {
+const ImageModal = ({ alt_description, modalIsOpen, closeModal, urls }) => {
   const customStyles = {
     content: {
       top: "50%",
@@ -29,11 +29,8 @@ const ImageModal = ({ imageModal, modalIsOpen, closeModal }) => {
       <div className={css.wraps}>
         <div className={css.modal}>
           <div>
-            <img
-              src={imageModal.urls.regular}
-              alt={imageModal.alt_description}
-            />
-            <p>{imageModal.alt_description}</p>
+            <img src={urls.regular} alt={alt_description} />
+            <p>{alt_description}</p>
           </div>
         </div>
       </div>

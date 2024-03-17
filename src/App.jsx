@@ -52,6 +52,7 @@ function App() {
   };
 
   const onSubmit = (e) => {
+    setSearchTerm(null);
     const form = e.target;
     const { searchInput } = form.elements;
     if (searchInput.value !== "") {
@@ -85,7 +86,8 @@ function App() {
         <ImageModal
           closeModal={closeModal}
           modalIsOpen={modalIsOpen}
-          imageModal={imageModal}
+          urls={imageModal.urls}
+          alt_description={imageModal.alt_description}
         />
       )}
     </div>
