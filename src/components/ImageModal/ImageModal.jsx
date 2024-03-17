@@ -11,27 +11,25 @@ const ImageModal = ({ imageModal, modalIsOpen, closeModal }) => {
       marginRight: "-50%",
       transform: "translate(-50%, -50%)",
       borderRadius: 15,
+      padding: 0,
+      border: "none",
+      backgroundColor: "transparent",
     },
   };
   return (
-    <div className="backdrop" onClick={closeModal}>
-      <Modal
-        style={customStyles}
-        isOpen={modalIsOpen}
-        onRequestClose={closeModal}
-        ariaHideApp={false}
-      >
-        <div className={css.modal}>
-          <div>
-            <img
-              src={imageModal.urls.regular}
-              alt={imageModal.alt_description}
-            />
-            <p>{imageModal.description}</p>
-          </div>
+    <Modal
+      style={customStyles}
+      isOpen={modalIsOpen}
+      onRequestClose={closeModal}
+      ariaHideApp={false}
+    >
+      <div className={css.modal}>
+        <div>
+          <img src={imageModal.urls.regular} alt={imageModal.alt_description} />
+          <p>{imageModal.alt_description}</p>
         </div>
-      </Modal>
-    </div>
+      </div>
+    </Modal>
   );
 };
 

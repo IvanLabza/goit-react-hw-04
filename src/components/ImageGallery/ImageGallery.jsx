@@ -1,4 +1,4 @@
-import ImageCard from "./ImageCard/ImageCard";
+import ImageCard from "../ImageCard/ImageCard";
 import css from "./ImageGallery.module.css";
 
 const ImageGallery = ({ images, openModal }) => {
@@ -6,10 +6,12 @@ const ImageGallery = ({ images, openModal }) => {
     <div>
       <ul className={css.gallery}>
         {images.map((image) => (
-          <li onClick={()=>openModal(image)} key={image.id}>
+          <li  key={image.id}>
             <ImageCard
               small={image.urls.small}
               description={image.alt_description}
+              openModal={openModal}
+              image={image}
             />
           </li>
         ))}
