@@ -10,8 +10,11 @@ const ImageModal = ({ imageModal, modalIsOpen, closeModal }) => {
       bottom: "auto",
       marginRight: "-50%",
       transform: "translate(-50%, -50%)",
-      borderRadius: 15,
-      padding: 0,
+      borderRadius: 20,
+      paddingRight: 7,
+      paddingLeft: 7,
+      paddingTop: 0,
+      paddingBottom: 0,
       border: "none",
       backgroundColor: "transparent",
     },
@@ -23,10 +26,15 @@ const ImageModal = ({ imageModal, modalIsOpen, closeModal }) => {
       onRequestClose={closeModal}
       ariaHideApp={false}
     >
-      <div className={css.modal}>
-        <div>
-          <img src={imageModal.urls.regular} alt={imageModal.alt_description} />
-          <p>{imageModal.alt_description}</p>
+      <div className={css.wraps}>
+        <div className={css.modal}>
+          <div>
+            <img
+              src={imageModal.urls.regular}
+              alt={imageModal.alt_description}
+            />
+            <p>{imageModal.alt_description}</p>
+          </div>
         </div>
       </div>
     </Modal>
