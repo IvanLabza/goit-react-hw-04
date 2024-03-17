@@ -4,9 +4,8 @@ import LoadMoreBtn from "./components/LoadMoreBtn/LoadMoreBtn";
 import { api } from "./servise/api";
 import ImageGallery from "./components/ImageGallery/ImageGallery";
 import Loader from "./components/Loader/Loader";
-import ErrorMassage from "./components/ErrorMassage/ErrorMassage";
+import ErrorMassage from "./components/ErrorMessage/ErrorMessage";
 import ImageModal from "./components/ImageModal/ImageModal";
-import toast from "react-hot-toast";
 
 function App() {
   const [searchResults, setSearchResults] = useState(null);
@@ -55,13 +54,9 @@ function App() {
     setSearchTerm(null);
     const form = e.target;
     const { searchInput } = form.elements;
-    if (searchInput.value !== "") {
-      setSearchTerm(searchInput.value);
-      form.reset();
-      setPage(1);
-    } else {
-      toast.error("This didn't work.", { duration: 1500 });
-    }
+    setSearchTerm(searchInput.value);
+    form.reset();
+    setPage(1);
   };
 
   const openModal = (image) => {
