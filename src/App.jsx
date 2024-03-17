@@ -18,27 +18,34 @@ function App() {
   const [modalIsOpen, setIsOpen] = useState(false);
   const [imageModal, setImageModal] = useState(null);
 
-useEffect(() => {
-  if (searchTerm === null) return;
-  async function fetchData() {
-    try {
-      setIsLoading(true);
-      const data = await api(searchTerm, page);
-      if (page === 1) {
-        setSearchResults(data);
-      } else if (Array.isArray(data) && Array.isArray(searchResults)) {
-        setSearchResults((prevState) => [...prevState, ...data]);
+  useEffect(() => {
+    if (searchTerm === null) return;
+    async function fetchData() {
+      try {
+        setIsLoading(true);
+        const data = await api(searchTerm, page);
+        if (data.length === 0) {
+          setSearchResults(null);
+          setError(true);
+          setLoadMore(false);
+        } else {
+          setError(false);
+          if (page === 1) {
+            setSearchResults(data);
+          } else if (Array.isArray(data) && Array.isArray(searchResults)) {
+            setSearchResults((prevState) => [...prevState, ...data]);
+          }
+          setLoadMore(true);
+        }
+      } catch (err) {
+        setError(true);
+      } finally {
+        setIsLoading(false);
       }
-      setLoadMore(true);
-    } catch (err) {
-      setError(true);
-    } finally {
-      setIsLoading(false);
     }
-  }
 
-  fetchData();
-}, [searchTerm, page]);
+    fetchData();
+  }, [searchTerm, page]);
 
   const loadMore = () => {
     setPage(page + 1);
