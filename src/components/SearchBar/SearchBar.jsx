@@ -3,14 +3,14 @@ import css from "./SearchBar.module.css";
 import toast, { Toaster } from "react-hot-toast";
 
 const SearchBar = ({ onSubmit }) => {
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (e.target.elements.searchInput.value !== "") {
-      onSubmit(e);
-    } else {
-      toast.error("This didn't work.", { duration: 1500 });
-    }
-  };
+ const handleSubmit = (e) => {
+   e.preventDefault();
+   if (e.target.elements.searchInput.value.trim() !== "") {
+     onSubmit(e.target.elements.searchInput.value.trim());
+   } else {
+     toast.error("This didn't work.", { duration: 1500 });
+   }
+ };
   return (
     <header>
       <form onSubmit={handleSubmit} className={css.searchBar}>

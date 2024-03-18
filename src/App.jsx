@@ -8,8 +8,8 @@ import ErrorMassage from "./components/ErrorMessage/ErrorMessage";
 import ImageModal from "./components/ImageModal/ImageModal";
 
 function App() {
-  const [searchResults, setSearchResults] = useState(null);
-  const [searchTerm, setSearchTerm] = useState(null);
+  const [searchResults, setSearchResults] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [page, setPage] = useState(1);
   const [isError, setError] = useState(false);
@@ -18,13 +18,13 @@ function App() {
   const [imageModal, setImageModal] = useState(null);
 
   useEffect(() => {
-    if (searchTerm === null) return;
+    if (!searchTerm) return;
     async function fetchData() {
       try {
         setIsLoading(true);
         const data = await api(searchTerm, page);
         if (data.length === 0) {
-          setSearchResults(null);
+          setSearchResults([]);
           setError(true);
           setLoadMore(false);
         } else {
@@ -51,11 +51,8 @@ function App() {
   };
 
   const onSubmit = (e) => {
-    setSearchTerm(null);
-    const form = e.target;
-    const { searchInput } = form.elements;
-    setSearchTerm(searchInput.value);
-    form.reset();
+    setSearchTerm(e);
+    setSearchResults([]);
     setPage(1);
   };
 
@@ -71,7 +68,7 @@ function App() {
   return (
     <div className="wrapper">
       <SearchBar onSubmit={onSubmit} />
-      {searchResults !== null && Array.isArray(searchResults) && (
+      {searchResults.length > 0 && (
         <ImageGallery openModal={openModal} images={searchResults} />
       )}
       {isLoading && <Loader />}
